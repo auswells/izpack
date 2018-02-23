@@ -92,6 +92,11 @@ public class ShortcutPanelLogic implements CleanupClient
     private boolean skipIfNotSupported = false;
 
     /**
+     * Disables previous button
+     */
+    private boolean disablePrevious = false;
+
+    /**
      * the one shortcut instance for reuse in many locations
      */
     private Shortcut shortcut;
@@ -472,6 +477,14 @@ public class ShortcutPanelLogic implements CleanupClient
     }
 
     /**
+     *
+     * @return true to disable previous navigation button, false to enable
+     */
+    public boolean isDisablePrevious() {
+        return disablePrevious;
+    }
+
+    /**
      * Called by {@link Housekeeper} to cleanup after installation.
      */
     @Override
@@ -786,6 +799,7 @@ public class ShortcutPanelLogic implements CleanupClient
         simulateNotSupported = (spec.getFirstChildNamed(SPEC_KEY_NOT_SUPPORTED) != null);
         defaultCurrentUserFlag = (spec.getFirstChildNamed(SPEC_KEY_DEF_CUR_USER) != null);
         skipIfNotSupported = (spec.getFirstChildNamed(SPEC_KEY_SKIP_IFNOT_SUPPORTED) != null);
+        disablePrevious = (spec.getFirstChildNamed(SPEC_KEY_DISABLE_PREVIOUS) != null);
         setCreateShortcutsImmediately(spec.getFirstChildNamed(SPEC_KEY_LATE_INSTALL) == null);
 
 
