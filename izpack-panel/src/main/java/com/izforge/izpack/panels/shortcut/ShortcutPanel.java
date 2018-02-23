@@ -211,10 +211,16 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
     }
 
     @Override
+    public void panelDeactivate() {
+        parent.unlockPrevButton();
+    }
+
+    @Override
     public void panelActivate()
     {
         try
         {
+            parent.lockPrevButton();
             shortcutPanelLogic.refreshShortcutData();
             allowDesktopShortcut.setVisible(shortcutPanelLogic.hasDesktopShortcuts());
             allowStartupShortcut.setVisible(shortcutPanelLogic.hasStartupShortcuts());
@@ -459,7 +465,7 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
 
         layout.addLayoutComponent(allowDesktopShortcut, constraints);
         add(allowDesktopShortcut);
-        
+
         boolean defaultStartupValue = shortcutPanelLogic.isStartupShortcutCheckboxSelected();
         allowStartupShortcut = new JCheckBox(shortcutPanelLogic.getCreateStartupShortcutsPrompt(), defaultStartupValue);
         allowStartupShortcut.setVisible(false);
@@ -533,7 +539,7 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
             }
 
             groupList = addList(dirEntries, ListSelectionModel.SINGLE_SELECTION, groupList, col,
-                                line + 5, 1, 1, GridBagConstraints.BOTH);
+                    line + 5, 1, 1, GridBagConstraints.BOTH);
             groupList.setSelectedIndex(0);
         }
 
@@ -559,7 +565,7 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
         usersPanel.add(allUsers);
 
         TitledBorder border = new TitledBorder(new EmptyBorder(2, 2, 2, 2),
-                                               shortcutPanelLogic.getCreateForUserPrompt());
+                shortcutPanelLogic.getCreateForUserPrompt());
         usersPanel.setBorder(border);
         if (platform.isA(WINDOWS))
         {
@@ -606,7 +612,7 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
         // original suggestion for the program group
         // ----------------------------------------------------
         defaultButton = ButtonFactory.createButton(getString("ShortcutPanel.regular.default"),
-                                                   installData.buttonsHColor);
+                installData.buttonsHColor);
         defaultButton.addActionListener(this);
 
         constraints.gridx = col + 1;
@@ -733,7 +739,7 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
         // static text that explains about the text file
         // ----------------------------------------------------
         MultiLineLabel fileExplanation = new MultiLineLabel(getString("ShortcutPanel.alternate.textFileExplanation"),
-                                                            0, 0);
+                0, 0);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
@@ -747,7 +753,7 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
         // button to save the text file
         // ----------------------------------------------------
         saveButton = ButtonFactory.createButton(getString("ShortcutPanel.alternate.saveButton"),
-                                                installData.buttonsHColor);
+                installData.buttonsHColor);
         saveButton.addActionListener(this);
 
         constraints.gridx = 0;
