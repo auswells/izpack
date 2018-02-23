@@ -220,8 +220,11 @@ public class ShortcutPanel extends IzPanel implements ActionListener, ListSelect
     {
         try
         {
-            parent.lockPrevButton();
             shortcutPanelLogic.refreshShortcutData();
+            if (shortcutPanelLogic.isDisablePrevious())
+            {
+                parent.lockPrevButton();
+            }
             allowDesktopShortcut.setVisible(shortcutPanelLogic.hasDesktopShortcuts());
             allowStartupShortcut.setVisible(shortcutPanelLogic.hasStartupShortcuts());
             usersPanel.setVisible(shortcutPanelLogic.isSupportingMultipleUsers());

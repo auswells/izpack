@@ -38,6 +38,8 @@ public class ShortcutConstants
     // -----------------------------------------------------
     static final String SPEC_KEY_SKIP_IFNOT_SUPPORTED = "skipIfNotSupported";
 
+    static final String SPEC_KEY_DISABLE_PREVIOUS = "disablePrevious";
+
     static final String SPEC_KEY_NOT_SUPPORTED = "notSupported";
 
     static final String SPEC_KEY_DEF_CUR_USER = "defaultCurrentUser";
